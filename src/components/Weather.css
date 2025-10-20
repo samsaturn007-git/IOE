@@ -1,0 +1,31 @@
+.weather-container {
+  text-align: center;
+  padding: 25px 0;
+  animation: fadeIn 1.2s ease-in;
+}
+
+.weather-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  filter: grayscale(100%) brightness(2);
+}
+
+.weather-temp {
+  font-size: 42px;
+  font-weight: 300;
+  color: #00BFFF;
+  margin-bottom: 8px;
+}
+
+.weather-condition {
+  font-size: 18px;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+.weather-location {
+  font-size: 14px;
+  font-weight: 300;
+  color: #AAAAAA;
+}

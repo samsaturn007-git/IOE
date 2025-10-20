@@ -1,0 +1,94 @@
+.iot-cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 25px 20px;
+  animation: fadeIn 1.6s ease-in;
+}
+
+.iot-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.iot-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, var(--primary, #00BFFF) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.iot-card:hover::before {
+  opacity: 0.05;
+}
+
+.iot-card:hover {
+  border-color: var(--primary, #00BFFF);
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--glow, rgba(0, 191, 255, 0.3));
+}
+
+.iot-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  filter: grayscale(100%) brightness(2);
+  animation: breathe 3s ease-in-out infinite;
+}
+
+.iot-value {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--secondary, #39FF14);
+  margin-bottom: 5px;
+  text-shadow: 0 0 15px currentColor;
+  font-variant-numeric: tabular-nums;
+}
+
+.iot-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--textSecondary, #AAAAAA);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.iot-status {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--primary, #00BFFF);
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.sparkline {
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+  opacity: 0.7;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}

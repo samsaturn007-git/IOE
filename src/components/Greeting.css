@@ -1,0 +1,23 @@
+.greeting-container {
+  text-align: center;
+  padding: 30px 20px;
+  animation: fadeIn 1.4s ease-in;
+}
+
+.greeting-text {
+  font-size: 28px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.quote-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: #AAAAAA;
+  font-style: italic;
+  line-height: 1.6;
+  max-width: 350px;
+  margin: 0 auto;
+}

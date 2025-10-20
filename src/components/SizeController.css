@@ -1,0 +1,202 @@
+.size-controller {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.size-toggle-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--primary, #00BFFF);
+  color: var(--primary, #00BFFF);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px var(--glow, rgba(0, 191, 255, 0.3));
+}
+
+.size-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: 0 0 30px var(--glow, rgba(0, 191, 255, 0.5));
+}
+
+.size-menu {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: rgba(10, 10, 10, 0.95);
+  border: 1px solid var(--primary, #00BFFF);
+  border-radius: 12px;
+  padding: 15px;
+  min-width: 280px;
+  backdrop-filter: blur(10px);
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+.size-menu-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--textSecondary, #AAAAAA);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.size-presets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.size-preset-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: var(--text, #FFFFFF);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.size-preset-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--primary, #00BFFF);
+  transform: translateX(5px);
+}
+
+.preset-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.preset-dims {
+  font-size: 11px;
+  color: var(--textSecondary, #AAAAAA);
+  font-family: 'Courier New', monospace;
+}
+
+.size-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 12px 0;
+}
+
+.size-custom {
+  margin-bottom: 12px;
+}
+
+.custom-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--textSecondary, #AAAAAA);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.custom-inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-group label {
+  font-size: 10px;
+  color: var(--textSecondary, #AAAAAA);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: var(--text, #FFFFFF);
+  font-size: 13px;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary, #00BFFF);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.apply-btn,
+.reset-btn {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--primary, #00BFFF);
+  border-radius: 6px;
+  color: var(--primary, #00BFFF);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.apply-btn:hover,
+.reset-btn:hover {
+  background: rgba(0, 191, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--glow, rgba(0, 191, 255, 0.3));
+}
+
+.reset-btn {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--textSecondary, #AAAAAA);
+}
+
+.reset-btn:hover {
+  border-color: var(--text, #FFFFFF);
+  color: var(--text, #FFFFFF);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 480px) {
+  .size-controller {
+    top: 70px;
+    right: 10px;
+  }
+
+  .size-menu {
+    right: -10px;
+    min-width: 260px;
+  }
+}

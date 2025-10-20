@@ -1,0 +1,29 @@
+.clock-container {
+  text-align: center;
+  padding: 30px 0;
+  animation: fadeIn 1s ease-in;
+}
+
+.time {
+  font-size: 64px;
+  font-weight: 300;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.date {
+  font-size: 18px;
+  font-weight: 400;
+  color: #AAAAAA;
+  letter-spacing: 1px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
