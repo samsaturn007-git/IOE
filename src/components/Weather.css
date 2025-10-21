@@ -1,31 +1,96 @@
 .weather-container {
-  text-align: center;
-  padding: 25px 0;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  padding: 20px 30px;
   animation: fadeIn 1.2s ease-in;
+  background: rgba(0, 191, 255, 0.05);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 191, 255, 0.2), inset 0 0 20px rgba(0, 191, 255, 0.05);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  align-items: center;
+  width: 100%;
 }
 
-.weather-icon {
-  font-size: 48px;
-  margin-bottom: 15px;
+.weather-current {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+  min-width: 200px;
+}
+
+.weather-icon-large {
+  font-size: 60px;
   filter: grayscale(100%) brightness(2);
+  line-height: 1;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .weather-temp {
-  font-size: 42px;
-  font-weight: 300;
+  font-size: 36px;
+  font-weight: 200;
   color: #00BFFF;
-  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 25px rgba(0, 191, 255, 0.6), 0 0 40px rgba(0, 191, 255, 0.3);
 }
 
 .weather-condition {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
   color: #FFFFFF;
-  margin-bottom: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.weather-location {
-  font-size: 14px;
-  font-weight: 300;
+.weather-weekly {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  padding-left: 20px;
+  border-left: 1px solid rgba(0, 191, 255, 0.2);
+}
+
+.weather-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  padding: 10px;
+  background: rgba(0, 191, 255, 0.03);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.weather-day:hover {
+  background: rgba(0, 191, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.weather-day-name {
+  font-size: 11px;
+  font-weight: 600;
   color: #AAAAAA;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.weather-day-icon {
+  font-size: 28px;
+  filter: grayscale(100%) brightness(2);
+}
+
+.weather-day-temp {
+  font-size: 14px;
+  font-weight: 500;
+  color: #00BFFF;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
 }

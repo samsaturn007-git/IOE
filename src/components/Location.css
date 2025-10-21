@@ -1,0 +1,57 @@
+.location-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 30px;
+  animation: fadeIn 2s ease-in;
+  background: rgba(0, 191, 255, 0.05);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 191, 255, 0.2), inset 0 0 20px rgba(0, 191, 255, 0.05);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.location-container:hover {
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.3), inset 0 0 25px rgba(0, 191, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.location-icon {
+  font-size: 40px;
+  filter: grayscale(100%) brightness(2);
+  line-height: 1;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.location-city {
+  font-size: 24px;
+  font-weight: 500;
+  color: #00BFFF;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 20px rgba(0, 191, 255, 0.6), 0 0 35px rgba(0, 191, 255, 0.3);
+}
+
+.location-country {
+  font-size: 13px;
+  font-weight: 400;
+  color: #AAAAAA;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

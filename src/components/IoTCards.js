@@ -30,20 +30,20 @@ const IoTCards = () => {
     temperature: 22.5,
     humidity: 65,
     airQuality: 85,
-    lightIntensity: 450
+    windSpeed: 12.5
   });
 
   const [history, setHistory] = useState({
     temperature: [22, 22.5, 23, 22.8, 22.5],
     humidity: [63, 64, 65, 66, 65],
     airQuality: [83, 84, 85, 86, 85],
-    lightIntensity: [420, 435, 450, 460, 450]
+    windSpeed: [10, 11, 12.5, 13, 12.5]
   });
 
   const animatedTemp = useAnimatedCounter(parseFloat(iotData.temperature), 800);
   const animatedHumidity = useAnimatedCounter(iotData.humidity, 800);
   const animatedAirQuality = useAnimatedCounter(iotData.airQuality, 800);
-  const animatedLight = useAnimatedCounter(iotData.lightIntensity, 800);
+  const animatedWindSpeed = useAnimatedCounter(parseFloat(iotData.windSpeed), 800);
 
   useEffect(() => {
     // Simulate IoT sensor updates every 5 seconds
@@ -52,7 +52,7 @@ const IoTCards = () => {
         temperature: parseFloat((Math.random() * 10 + 18).toFixed(1)),
         humidity: Math.floor(Math.random() * 30 + 50),
         airQuality: Math.floor(Math.random() * 30 + 70),
-        lightIntensity: Math.floor(Math.random() * 500 + 200)
+        windSpeed: parseFloat((Math.random() * 20 + 5).toFixed(1))
       };
       
       setIotData(newData);
@@ -62,7 +62,7 @@ const IoTCards = () => {
         temperature: [...prev.temperature.slice(1), newData.temperature],
         humidity: [...prev.humidity.slice(1), newData.humidity],
         airQuality: [...prev.airQuality.slice(1), newData.airQuality],
-        lightIntensity: [...prev.lightIntensity.slice(1), newData.lightIntensity]
+        windSpeed: [...prev.windSpeed.slice(1), newData.windSpeed]
       }));
     }, 5000);
 
@@ -87,14 +87,12 @@ const IoTCards = () => {
         <div className="iot-icon">🌡️</div>
         <div className="iot-value">{animatedTemp.toFixed(1)}°C</div>
         <div className="iot-label">Temperature</div>
-        <Sparkline data={history.temperature} color="var(--primary, #00BFFF)" />
       </div>
 
       <div className="iot-card">
         <div className="iot-icon">💧</div>
         <div className="iot-value">{Math.round(animatedHumidity)}%</div>
         <div className="iot-label">Humidity</div>
-        <Sparkline data={history.humidity} color="var(--primary, #00BFFF)" />
       </div>
 
       <div className="iot-card" style={{ borderColor: getAirQualityColor(iotData.airQuality) }}>
@@ -106,14 +104,12 @@ const IoTCards = () => {
         <div className="iot-status" style={{ color: getAirQualityColor(iotData.airQuality) }}>
           {getAirQualityStatus(iotData.airQuality)}
         </div>
-        <Sparkline data={history.airQuality} color={getAirQualityColor(iotData.airQuality)} />
       </div>
 
       <div className="iot-card">
-        <div className="iot-icon">💡</div>
-        <div className="iot-value">{Math.round(animatedLight)}</div>
-        <div className="iot-label">Light (lux)</div>
-        <Sparkline data={history.lightIntensity} color="var(--secondary, #39FF14)" />
+        <div className="iot-icon">💨</div>
+        <div className="iot-value">{animatedWindSpeed.toFixed(1)} km/h</div>
+        <div className="iot-label">Wind Speed</div>
       </div>
     </div>
   );

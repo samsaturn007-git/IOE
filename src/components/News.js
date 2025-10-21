@@ -138,7 +138,7 @@ const News = () => {
     return (
       <div className="news-container">
         <div className="news-header">
-          <span>📰 Loading Headlines...</span>
+          <span>📰 Loading News...</span>
         </div>
       </div>
     );
@@ -150,7 +150,9 @@ const News = () => {
 
   const displayedNews = [
     newsItems[currentNewsIndex],
-    newsItems[(currentNewsIndex + 1) % newsItems.length]
+    newsItems[(currentNewsIndex + 1) % newsItems.length],
+    newsItems[(currentNewsIndex + 2) % newsItems.length],
+    newsItems[(currentNewsIndex + 3) % newsItems.length]
   ].filter(Boolean);
 
   return (
@@ -162,7 +164,7 @@ const News = () => {
       onTouchEnd={handleTouchEnd}
     >
       <div className="news-header">
-        <span>📰 Today's Headlines</span>
+        <span>📰 News of the Day</span>
         <div className="news-indicators">
           {newsItems.map((_, index) => (
             <span 

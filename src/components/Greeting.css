@@ -1,23 +1,68 @@
 .greeting-container {
   text-align: center;
-  padding: 30px 20px;
+  padding: 0;
   animation: fadeIn 1.4s ease-in;
 }
 
 .greeting-text {
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 56px;
+  font-weight: 300;
   color: #FFFFFF;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
+  margin-bottom: 30px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  font-family: 'Brush Script MT', 'Lucida Handwriting', 'Segoe Script', cursive;
+  font-style: italic;
+  background: linear-gradient(135deg, #FFFFFF 0%, #00BFFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.quote-text {
-  font-size: 14px;
+.team-names {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  min-height: 40px;
+  align-items: center;
+}
+
+.team-name {
+  font-size: 28px;
+  font-weight: 500;
+  color: #00BFFF;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeInOut 3s ease-in-out infinite;
+  text-shadow: 0 0 25px rgba(0, 191, 255, 0.8);
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.motivational-quote {
+  font-size: 18px;
   font-weight: 300;
   color: #AAAAAA;
   font-style: italic;
   line-height: 1.6;
-  max-width: 350px;
+  max-width: 500px;
   margin: 0 auto;
+  letter-spacing: 1px;
 }

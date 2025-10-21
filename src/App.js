@@ -22,33 +22,31 @@ function App() {
           <ParticleBackground />
           <SeasonalEffects />
           
-          {/* Top Section: Clock & Date */}
-          <section className="section-top">
-            <Clock />
+          {/* Top Row: Clock (left) & Weather (right) */}
+          <section className="section-top-row">
+            <div className="section-top">
+              <Clock />
+            </div>
+            <div className="section-weather">
+              <Weather />
+            </div>
           </section>
 
-          {/* Weather Widget */}
-          <section className="section-weather">
-            <Weather />
-          </section>
-
-          {/* Greeting & Quote */}
+          {/* Greeting & Team Names */}
           <section className="section-greeting">
             <Greeting />
           </section>
 
-          {/* IoT Data Cards */}
+          {/* IoT Data Cards & News Section */}
           <section className="section-iot">
             <IoTCards />
+            <div className="section-news">
+              <News />
+            </div>
           </section>
 
           {/* Spacer for vertical balance */}
           <div className="spacer"></div>
-
-          {/* News Section - Bottom */}
-          <section className="section-news">
-            <News />
-          </section>
         </div>
       </div>
     </ThemeProvider>

@@ -1,20 +1,25 @@
 .iot-cards-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  padding: 25px 20px;
+  gap: 20px;
+  padding: 0;
   animation: fadeIn 1.6s ease-in;
+  margin-bottom: 40px;
+  max-width: 650px;
+  margin-right: auto;
 }
 
 .iot-card {
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 20px;
+  background: rgba(0, 191, 255, 0.05);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 12px;
+  padding: 25px;
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.15), inset 0 0 20px rgba(0, 191, 255, 0.05);
+  backdrop-filter: blur(10px);
 }
 
 .iot-card::before {
@@ -36,25 +41,26 @@
 
 .iot-card:hover {
   border-color: var(--primary, #00BFFF);
-  background-color: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 191, 255, 0.08);
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px var(--glow, rgba(0, 191, 255, 0.3));
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.35), inset 0 0 25px rgba(0, 191, 255, 0.08);
 }
 
 .iot-icon {
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-size: 40px;
+  margin-bottom: 12px;
   filter: grayscale(100%) brightness(2);
   animation: breathe 3s ease-in-out infinite;
 }
 
 .iot-value {
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 32px;
+  font-weight: 200;
   color: var(--secondary, #39FF14);
-  margin-bottom: 5px;
-  text-shadow: 0 0 15px currentColor;
+  margin-bottom: 8px;
+  text-shadow: 0 0 25px currentColor, 0 0 40px currentColor;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
 }
 
 .iot-label {
