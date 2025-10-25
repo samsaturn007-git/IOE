@@ -148,12 +148,7 @@ const News = () => {
     return null;
   }
 
-  const displayedNews = [
-    newsItems[currentNewsIndex],
-    newsItems[(currentNewsIndex + 1) % newsItems.length],
-    newsItems[(currentNewsIndex + 2) % newsItems.length],
-    newsItems[(currentNewsIndex + 3) % newsItems.length]
-  ].filter(Boolean);
+  const currentNews = newsItems[currentNewsIndex];
 
   return (
     <div 
@@ -175,15 +170,13 @@ const News = () => {
         </div>
       </div>
       <div className="news-items">
-        {displayedNews.map((news, index) => (
-          <div key={`${currentNewsIndex}-${index}`} className="news-item">
-            <div className="news-title">{news.title}</div>
-            <div className="news-meta">
-              <span className="news-source">{news.source}</span>
-              <span className="news-time">{getTimeAgo(news.publishedAt)}</span>
-            </div>
+        <div key={currentNewsIndex} className="news-item">
+          <div className="news-title">{currentNews.title}</div>
+          <div className="news-meta">
+            <span className="news-source">{currentNews.source}</span>
+            <span className="news-time">{getTimeAgo(currentNews.publishedAt)}</span>
           </div>
-        ))}
+        </div>
       </div>
       <div className="news-swipe-hint">← Swipe to navigate →</div>
     </div>

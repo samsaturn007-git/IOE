@@ -3,11 +3,11 @@ import './SizeController.css';
 
 const SizeController = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [customWidth, setCustomWidth] = useState(400);
-  const [customHeight, setCustomHeight] = useState(1678);
+  const [customWidth, setCustomWidth] = useState(1200);
+  const [customHeight, setCustomHeight] = useState(2100);
 
   const presets = [
-    { name: 'Default', width: 400, height: 1678 },
+    { name: 'Default', width: 1200, height: 2100 },
     { name: 'Tablet', width: 768, height: 1024 },
     { name: 'Desktop', width: 1920, height: 1080 },
     { name: 'Mobile', width: 375, height: 812 },
@@ -30,7 +30,7 @@ const SizeController = () => {
   };
 
   const resetToDefault = () => {
-    applySize(400, 1678);
+    applySize(1200, 2100);
     setIsOpen(false);
   };
 

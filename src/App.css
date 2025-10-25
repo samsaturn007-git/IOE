@@ -1,7 +1,7 @@
 :root {
   --primary: #00BFFF;
   --secondary: #39FF14;
-  --background: #000000;
+  --background: transparent;
   --text: #FFFFFF;
   --textSecondary: #AAAAAA;
   --glow: rgba(0, 191, 255, 0.3);
@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--background);
+  background-color: transparent;
   padding: 20px;
   filter: brightness(var(--brightness));
   overflow: auto;
@@ -69,9 +69,10 @@
 
 .section-greeting {
   flex-shrink: 0;
-  padding: 60px 40px 40px;
+  padding: 20px 40px 15px;
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 
 .section-iot {
@@ -87,13 +88,31 @@
 
 .spacer {
   flex-grow: 1;
-  min-height: 30px;
+  min-height: 300px;
 }
 
 .section-news {
   flex: 1;
   min-width: 450px;
   z-index: 2;
+}
+
+.section-news-bottom {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  padding: 0 40px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.section-news-bottom .news-container {
+  max-width: 800px;
+  width: auto;
+  max-height: 120px;
+  overflow: hidden;
+  margin-bottom: 0;
 }
 
 
@@ -112,7 +131,7 @@
 .ripple {
   position: absolute;
   border-radius: 50%;
-  background: var(--primary);
+  background: none;
   width: 20px;
   height: 20px;
   animation: ripple 0.6s ease-out;

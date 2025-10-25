@@ -9,7 +9,7 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  background: transparent;
   border: 1px solid var(--primary, #00BFFF);
   color: var(--primary, #00BFFF);
   font-size: 20px;
@@ -19,7 +19,7 @@
 }
 
 .size-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: transparent;
   transform: scale(1.1) rotate(15deg);
   box-shadow: 0 0 30px var(--glow, rgba(0, 191, 255, 0.5));
 }
@@ -28,7 +28,7 @@
   position: absolute;
   top: 55px;
   right: 0;
-  background: rgba(10, 10, 10, 0.95);
+  background: transparent;
   border: 1px solid var(--primary, #00BFFF);
   border-radius: 12px;
   padding: 15px;
@@ -61,7 +61,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 12px;
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   color: var(--text, #FFFFFF);
@@ -70,7 +70,7 @@
 }
 
 .size-preset-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   border-color: var(--primary, #00BFFF);
   transform: translateX(5px);
 }
@@ -161,7 +161,7 @@
 
 .apply-btn:hover,
 .reset-btn:hover {
-  background: rgba(0, 191, 255, 0.1);
+  background: transparent;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px var(--glow, rgba(0, 191, 255, 0.3));
 }
