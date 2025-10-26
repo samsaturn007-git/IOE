@@ -50,6 +50,28 @@
   text-transform: uppercase;
 }
 
+.weather-location {
+  font-size: 11px;
+  font-weight: 300;
+  color: #00BFFF;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.weather-error {
+  text-align: center;
+  padding: 20px;
+  color: #FF6B6B;
+}
+
+.weather-error small {
+  display: block;
+  margin-top: 10px;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
 .weather-weekly {
   display: flex;
   gap: 12px;

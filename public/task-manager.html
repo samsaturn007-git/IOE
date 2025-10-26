@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Mirror - Task Manager</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+    }
+
+    .add-task {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .task-input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .task-input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    select {
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: white;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-add {
+      background: #667eea;
+      color: white;
+    }
+
+    .btn-add:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-clear {
+      background: #ff6b6b;
+      color: white;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .btn-clear:hover {
+      background: #ee5a5a;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #f5f5f5;
+      border-radius: 10px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .task-list {
+      list-style: none;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 10px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      border-left: 4px solid #667eea;
+      transition: all 0.3s;
+    }
+
+    .task-item:hover {
+      background: #f0f0f0;
+      transform: translateX(5px);
+    }
+
+    .task-item.completed {
+      opacity: 0.6;
+      border-left-color: #4caf50;
+    }
+
+    .task-item.high {
+      border-left-color: #ff6b6b;
+    }
+
+    .task-item.low {
+      border-left-color: #95a5a6;
+    }
+
+    .task-checkbox {
+      width: 24px;
+      height: 24px;
+      margin-right: 15px;
+      cursor: pointer;
+      accent-color: #667eea;
+    }
+
+    .task-text {
+      flex: 1;
+      font-size: 1rem;
+    }
+
+    .task-item.completed .task-text {
+      text-decoration: line-through;
+      color: #999;
+    }
+
+    .task-priority {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .task-delete {
+      padding: 8px 12px;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .task-delete:hover {
+      background: #ee5a5a;
+      transform: scale(1.05);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+    }
+
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      color: #1976d2;
+      border-left: 4px solid #2196f3;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📋 Smart Mirror Task Manager</h1>
+    <p class="subtitle">Manage your local to-do list</p>
+
+    <div class="info-box">
+      <strong>📱 Access from your phone:</strong>
+      Open this page at: <strong>http://[your-mirror-ip]:3000/task-manager.html</strong>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value" id="totalTasks">0</div>
+        <div class="stat-label">Total Tasks</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="activeTasks">0</div>
+        <div class="stat-label">Active</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="completedTasks">0</div>
+        <div class="stat-label">Completed</div>
+      </div>
+    </div>
+
+    <div class="add-task">
+      <input 
+        type="text" 
+        id="taskInput" 
+        class="task-input" 
+        placeholder="Enter a new task..."
+        onkeypress="if(event.key==='Enter') addTask()"
+      >
+      <select id="prioritySelect">
+        <option value="high">⭐ High</option>
+        <option value="normal" selected>📌 Normal</option>
+        <option value="low">📝 Low</option>
+      </select>
+      <button class="btn btn-add" onclick="addTask()">Add</button>
+    </div>
+
+    <ul class="task-list" id="taskList"></ul>
+
+    <button class="btn btn-clear" onclick="clearAllTasks()">Clear All Tasks</button>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'localTodoTasks';
+
+    function getTasks() {
+      const tasks = localStorage.getItem(STORAGE_KEY);
+      return tasks ? JSON.parse(tasks) : [];
+    }
+
+    function saveTasks(tasks) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+      renderTasks();
+    }
+
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const priority = document.getElementById('prioritySelect').value;
+      const title = input.value.trim();
+
+      if (!title) {
+        alert('Please enter a task!');
+        return;
+      }
+
+      const tasks = getTasks();
+      const newTask = {
+        id: Date.now().toString(),
+        title: title,
+        isCompleted: false,
+        importance: priority,
+        createdAt: Date.now()
+      };
+
+      tasks.push(newTask);
+      saveTasks(tasks);
+      input.value = '';
+      input.focus();
+    }
+
+    function toggleTask(taskId) {
+      const tasks = getTasks();
+      const task = tasks.find(t => t.id === taskId);
+      if (task) {
+        task.isCompleted = !task.isCompleted;
+        saveTasks(tasks);
+      }
+    }
+
+    function deleteTask(taskId) {
+      if (confirm('Delete this task?')) {
+        const tasks = getTasks().filter(t => t.id !== taskId);
+        saveTasks(tasks);
+      }
+    }
+
+    function clearAllTasks() {
+      if (confirm('Delete all tasks? This cannot be undone!')) {
+        localStorage.removeItem(STORAGE_KEY);
+        renderTasks();
+      }
+    }
+
+    function getPriorityIcon(importance) {
+      switch(importance) {
+        case 'high': return '⭐';
+        case 'normal': return '📌';
+        case 'low': return '📝';
+        default: return '📌';
+      }
+    }
+
+    function renderTasks() {
+      const tasks = getTasks();
+      const taskList = document.getElementById('taskList');
+      
+      // Update stats
+      document.getElementById('totalTasks').textContent = tasks.length;
+      document.getElementById('activeTasks').textContent = tasks.filter(t => !t.isCompleted).length;
+      document.getElementById('completedTasks').textContent = tasks.filter(t => t.isCompleted).length;
+
+      // Sort: incomplete first, then by creation date
+      const sortedTasks = [...tasks].sort((a, b) => {
+        if (a.isCompleted !== b.isCompleted) {
+          return a.isCompleted ? 1 : -1;
+        }
+        return b.createdAt - a.createdAt;
+      });
+
+      if (sortedTasks.length === 0) {
+        taskList.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📝</div>
+            <div>No tasks yet! Add one above to get started.</div>
+          </div>
+        `;
+        return;
+      }
+
+      taskList.innerHTML = sortedTasks.map(task => `
+        <li class="task-item ${task.isCompleted ? 'completed' : ''} ${task.importance}">
+          <input 
+            type="checkbox" 
+            class="task-checkbox" 
+            ${task.isCompleted ? 'checked' : ''}
+            onchange="toggleTask('${task.id}')"
+          >
+          <span class="task-priority">${getPriorityIcon(task.importance)}</span>
+          <span class="task-text">${task.title}</span>
+          <button class="task-delete" onclick="deleteTask('${task.id}')">Delete</button>
+        </li>
+      `).join('');
+    }
+
+    // Initial render
+    renderTasks();
+
+    // Auto-refresh every 2 seconds to catch changes from the mirror
+    setInterval(renderTasks, 2000);
+  </script>
+</body>
+</html>
