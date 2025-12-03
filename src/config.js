@@ -48,6 +48,11 @@ const config = {
   // 5. Copy the Application (client) ID below
   MS_TODO_CLIENT_ID: 'YOUR_CLIENT_ID_HERE', // Replace with your Microsoft App Client ID
   MS_TODO_SCOPES: 'Tasks.Read Tasks.ReadWrite',
+  
+  // Gemini AI API Settings
+  // Get your free API key from: https://makersuite.google.com/app/apikey
+  // Free tier: 60 requests per minute
+  GEMINI_API_KEY: 'AIzaSyCG2E12mguC5j34oikJl0IfdLFg5J-TWqw', // Replace with your Gemini API key
 };
 
 export default config;

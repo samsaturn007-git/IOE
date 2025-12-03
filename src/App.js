@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import './App.css';
 import ThemeSwitcher from './components/ThemeSwitcher';
@@ -10,9 +10,11 @@ import News from './components/News';
 import MusicPlayer from './components/MusicPlayer';
 import MusicVisualizer from './components/MusicVisualizer';
 import TodoList from './components/TodoListSimple';
+import VoiceAssistant from './components/VoiceAssistant';
 
 function App() {
   const [audioData, setAudioData] = useState(null);
+  const musicPlayerRef = useRef(null);
 
   const handleAudioDataUpdate = (data) => {
     setAudioData(data);
@@ -32,7 +34,7 @@ function App() {
               <Clock />
               {/* Music Player below Clock */}
               <div className="section-music-player">
-                <MusicPlayer onAudioDataUpdate={handleAudioDataUpdate} />
+                <MusicPlayer ref={musicPlayerRef} onAudioDataUpdate={handleAudioDataUpdate} />
               </div>
             </div>
             <div className="section-weather">
@@ -44,6 +46,11 @@ function App() {
 
           {/* Spacer for vertical balance */}
           <div className="spacer"></div>
+
+          {/* Voice Assistant - Centered above greeting */}
+          <div className="voice-assistant-wrapper">
+            <VoiceAssistant musicPlayerRef={musicPlayerRef} />
+          </div>
 
           {/* Greeting & Team Names */}
           <section className="section-greeting">

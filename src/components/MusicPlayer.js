@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle, useCallback } from 'react';
 import './MusicPlayer.css';
 
-const MusicPlayer = ({ onAudioDataUpdate }) => {
+const MusicPlayer = forwardRef(({ onAudioDataUpdate }, ref) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -18,8 +18,8 @@ const MusicPlayer = ({ onAudioDataUpdate }) => {
   // Sample playlist - you can add your own music files
   const playlist = [
     { title: 'Bitter Sweet Symphony', artist: 'The Verve', src: '/music/Bitter Sweet Symphony (Remastered 2016).mp3' },
-    { title: 'Add More Music', artist: 'See public/music/README.md', src: '' },
-    { title: 'Track 3', artist: 'Artist 3', src: '' },
+    { title: 'Back to friends', artist: 'Sombr', src: '/music/sombr - back to friends (official audio) - sombr.mp3' },
+    { title: 'I Wanna Be Yours', artist: 'Arctic Monkeys', src: '/music/Arctic Monkeys - I Wanna Be Yours - LatinHype.mp3' },
   ];
 
   // Initialize Audio Context and Analyser
@@ -76,35 +76,6 @@ const MusicPlayer = ({ onAudioDataUpdate }) => {
     animationFrameRef.current = requestAnimationFrame(updateAudioData);
   };
 
-  // Handle time updates
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
-    const handleEnded = () => handleNext();
-    const handleError = (e) => {
-      console.error('Audio error:', e);
-      setIsPlaying(false);
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-
-    audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('loadedmetadata', updateDuration);
-    audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('error', handleError);
-
-    return () => {
-      audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('loadedmetadata', updateDuration);
-      audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('error', handleError);
-    };
-  }, [currentTrack]);
-
   const togglePlay = async () => {
     if (!audioRef.current) return;
 
@@ -138,7 +109,7 @@ const MusicPlayer = ({ onAudioDataUpdate }) => {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setCurrentTrack((prev) => (prev + 1) % playlist.length);
     setIsPlaying(false);
     if (animationFrameRef.current) {
@@ -155,9 +126,9 @@ const MusicPlayer = ({ onAudioDataUpdate }) => {
         }
       }
     }, 100);
-  };
+  }, [currentTrack, playlist]);
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     setCurrentTrack((prev) => (prev - 1 + playlist.length) % playlist.length);
     setIsPlaying(false);
     if (animationFrameRef.current) {
@@ -174,7 +145,7 @@ const MusicPlayer = ({ onAudioDataUpdate }) => {
         }
       }
     }, 100);
-  };
+  }, [currentTrack, playlist]);
 
   const handleVolumeChange = (e) => {
     const newVolume = parseFloat(e.target.value);
@@ -198,6 +169,65 @@ const MusicPlayer = ({ onAudioDataUpdate }) => {
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
+
+  // Handle time updates
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const updateTime = () => setCurrentTime(audio.currentTime);
+    const updateDuration = () => setDuration(audio.duration);
+    const handleEnded = () => handleNext();
+    const handleError = (e) => {
+      console.error('Audio error:', e);
+      setIsPlaying(false);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+
+    audio.addEventListener('timeupdate', updateTime);
+    audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('error', handleError);
+
+    return () => {
+      audio.removeEventListener('timeupdate', updateTime);
+      audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('error', handleError);
+    };
+  }, [currentTrack, handleNext]);
+
+  // Expose methods to parent component via ref
+  useImperativeHandle(ref, () => ({
+    play: async () => {
+      if (!audioRef.current || isPlaying) return;
+      try {
+        if (!playlist[currentTrack].src) {
+          console.error('No audio source available');
+          return false;
+        }
+        await audioRef.current.play();
+        setIsPlaying(true);
+        return true;
+      } catch (error) {
+        console.error('Error playing audio:', error);
+        return false;
+      }
+    },
+    pause: () => {
+      if (!audioRef.current || !isPlaying) return;
+      audioRef.current.pause();
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      setIsPlaying(false);
+    },
+    next: handleNext,
+    previous: handlePrevious,
+    isPlaying: () => isPlaying
+  }), [isPlaying, currentTrack, handleNext, handlePrevious]);
 
   return (
     <div className="music-player">
@@ -270,6 +300,6 @@ const MusicPlayer = ({ onAudioDataUpdate }) => {
       </div>
     </div>
   );
-};
+});
 
 export default MusicPlayer;

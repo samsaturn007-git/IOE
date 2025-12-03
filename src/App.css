@@ -75,6 +75,18 @@
   text-align: center;
 }
 
+/* Voice Assistant Wrapper */
+.voice-assistant-wrapper {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 999;
+  padding: 40px 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+}
+
 /* Music Player Section */
 .section-music-player {
   margin-top: 20px;
